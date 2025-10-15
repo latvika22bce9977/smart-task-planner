@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Task Planner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>📋 Task Planner</h1>
+                <button class="new-chat-btn" onclick="newChat()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    New Plan
+                </button>
+            </div>
+            
+            <div class="history-section">
+                <h3>Recent Plans</h3>
+                <div id="historyList" class="history-list">
+                    <!-- History items will be added here -->
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="model-info">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <span>Using Ollama (Local)</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="main-content">
+            <div class="chat-container" id="chatContainer">
+                <!-- Welcome Screen -->
+                <div class="welcome-screen" id="welcomeScreen">
+                    <div class="welcome-content">
+                        <h1>🚀 Smart Task Planner</h1>
+                        <p>AI-powered planning assistant using local Ollama</p>
+                        
+                        <div class="example-prompts">
+                            <h3>Example prompts:</h3>
+                            <button class="example-btn" onclick="setPrompt('Launch a product in 2 weeks')">
+                                Launch a product in 2 weeks
+                            </button>
+                            <button class="example-btn" onclick="setPrompt('Organize a conference for 200 people in 3 months')">
+                                Organize a conference for 200 people
+                            </button>
+                            <button class="example-btn" onclick="setPrompt('Learn Python and build a web app in 6 months')">
+                                Learn Python and build a web app
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messages will be added here -->
+                <div class="messages" id="messages"></div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-container">
+                <form class="input-form" id="inputForm" onsubmit="sendMessage(event)">
+                    <textarea 
+                        id="userInput" 
+                        class="message-input" 
+                        placeholder="Describe your goal... (e.g., 'Launch a product in 2 weeks')"
+                        rows="1"
+                        onkeydown="handleKeyDown(event)"
+                    ></textarea>
+                    <button type="submit" class="send-btn" id="sendBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </form>
+                
+                <!-- Optional inputs (expandable) -->
+                <div class="optional-inputs" id="optionalInputs" style="display: none;">
+                    <input type="text" id="deadlineInput" placeholder="Deadline (e.g., '2 weeks', '2025-12-31')" class="optional-field">
+                    <input type="text" id="constraintsInput" placeholder="Constraints (comma-separated, e.g., 'team of 2, limited budget')" class="optional-field">
+                </div>
+                
+                <button class="toggle-options-btn" onclick="toggleOptions()">
+                    <span id="optionsToggleText">+ Add deadline & constraints</span>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
